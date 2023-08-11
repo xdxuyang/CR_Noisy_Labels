@@ -1,10 +1,8 @@
-# GreaseLM: Graph REASoning Enhanced Language Models for Question Answering
+# Robust Commonsense Reasoning against Noisy Labels using Adaptive Correction
 
-This repo provides the source code & data of our paper [GreaseLM: Graph REASoning Enhanced Language Models for Question Answering](https://arxiv.org/abs/2201.08860) (ICLR 2022 spotlight).
+This repo provides the source code & data of our paper 'Robust Commonsense Reasoning against Noisy Labels using Adaptive Correction.'
 
-<p align="center">
-  <img src="./figs/greaselm.png" width="600" title="GreaseLM model architecture" alt="">
-</p>
+
 
 ## 1. Dependencies
 
@@ -85,51 +83,4 @@ To train GreaseLM on CommonsenseQA, run
 ```
 CUDA_VISIBLE_DEVICES=0 ./run_greaselm.sh csqa --data_dir data/
 ```
-You can specify up to 2 GPUs you want to use in the beginning of the command `CUDA_VISIBLE_DEVICES=...`.
 
-Similarly, to train GreaseLM on OpenbookQA, run
-```
-CUDA_VISIBLE_DEVICES=0 ./run_greaselm.sh obqa --data_dir data/
-```
-
-To train GreaseLM on MedQA-USMLE, run
-```
-CUDA_VISIBLE_DEVICES=0 ./run_greaselm__medqa_usmle.sh
-```
-
-## 4. Pretrained model checkpoints
-You can download a pretrained GreaseLM model on CommonsenseQA [here](https://drive.google.com/file/d/1QPwLZFA6AQ-pFfDR6TWLdBAvm3c_HOUr/view?usp=sharing), which achieves an IH-dev acc. of `79.0` and an IH-test acc. of `74.0`.
-
-You can also download a pretrained GreaseLM model on OpenbookQA [here](https://drive.google.com/file/d/1-QqyiQuU9xlN20vwfIaqYQ_uJMP8d7Pv/view?usp=sharing), which achieves an test acc. of `84.8`.
-
-You can also download a pretrained GreaseLM model on MedQA-USMLE [here](https://drive.google.com/file/d/1j0QxiBiGbv0s9PhseSly6V6uiHWU5IEt/view?usp=sharing), which achieves an test acc. of `38.5`.
-
-## 5. Evaluating a pretrained model checkpoint
-To evaluate a pretrained GreaseLM model checkpoint on CommonsenseQA, run
-```
-CUDA_VISIBLE_DEVICES=0 ./eval_greaselm.sh csqa --data_dir data/ --load_model_path /path/to/checkpoint
-```
-Again you can specify up to 2 GPUs you want to use in the beginning of the command `CUDA_VISIBLE_DEVICES=...`.
-
-Similarly, to evaluate a pretrained GreaseLM model checkpoint on OpenbookQA, run
-```
-CUDA_VISIBLE_DEVICES=0 ./eval_greaselm.sh obqa --data_dir data/ --load_model_path /path/to/checkpoint
-```
-To evaluate a pretrained GreaseLM model checkpoint on MedQA-USMLE, run
-```
-INHERIT_BERT=1 CUDA_VISIBLE_DEVICES=0 ./eval_greaselm.sh medqa_usmle --data_dir data/ --load_model_path /path/to/checkpoint
-```
-
-## 6. Use your own dataset
-- Convert your dataset to  `{train,dev,test}.statement.jsonl`  in .jsonl format (see `data/csqa/statement/train.statement.jsonl`)
-- Create a directory in `data/{yourdataset}/` to store the .jsonl files
-- Modify `preprocess.py` and perform subgraph extraction for your data
-- Modify `utils/parser_utils.py` to support your own dataset
-
-## 7. Acknowledgment
-This repo is built upon the following work:
-```
-QA-GNN: Question Answering using Language Models and Knowledge Graphs
-https://github.com/michiyasunaga/qagnn
-```
-Many thanks to the authors and developers!
